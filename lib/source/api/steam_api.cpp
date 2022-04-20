@@ -146,6 +146,9 @@ namespace steam::api {
             shortcuts->get().erase(std::to_string(i + 1));
         }
 
+        auto shortcutsFile = fs::File(getShortcutsFilePath(user) / "shortcuts.vdf", fs::File::Mode::Create);
+        shortcutsFile.write(shortcuts->dump());
+
         return true;
     }
 

@@ -56,6 +56,10 @@ namespace steam::fs {
         return getHomeDirectory() / ".steam" / "steam";
     }
 
+    static inline std::fs::path getSteamDataDirectory() {
+        return getHomeDirectory() / ".local" / "share" / "Steam";
+    }
+
     bool isPathWritable(const std::fs::path &path);
 
 }

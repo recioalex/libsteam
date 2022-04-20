@@ -150,13 +150,14 @@ namespace steam::api {
     }
 
     bool enableProtonForApp(AppId appId, bool enabled) {
-        auto configPath = fs::getSteamDirectory() / "config";
+        auto configPath = fs::getSteamDataDirectory() / "config";
 
         // Create backup of original config file if there haven't been any modifications done by us yet
         if (!fs::exists(configPath / "config.vdf.orig"))
             if (!fs::copyFile(configPath / "config.vdf", configPath / "config.vdf.orig")) return false;
 
         // Create a backup of the current config file
+        if (fs::exists(configPath / "config.vdf.bak"))
         if (!fs::remove(configPath / "config.vdf.bak")) return false;
         if (!fs::copyFile(configPath / "config.vdf", configPath / "config.vdf.bak")) return false;
 

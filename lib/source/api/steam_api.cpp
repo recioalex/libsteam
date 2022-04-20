@@ -102,7 +102,7 @@ namespace steam::api {
         }
 
         // Dump the shortcut data back to the shortcuts file
-        auto shortcutsFile = fs::File(getShortcutsFilePath(user), fs::File::Mode::Create);
+        auto shortcutsFile = fs::File(getShortcutsFilePath(user) / "shortcuts.vdf", fs::File::Mode::Create);
         shortcutsFile.write(shortcuts->dump());
 
         return appId;

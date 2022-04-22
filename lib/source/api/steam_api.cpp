@@ -137,7 +137,11 @@ namespace steam::api {
             return false;
 
         // Remove the shortcut
-        shortcuts->get().erase(shortcutToRemoveKey);
+        (*shortcuts)["shortcuts"].set().erase(shortcutToRemoveKey);
+
+
+
+
 
         // Move all following entries backwards to keep the array contiguous
         auto shortcutIndex = std::stoi(shortcutToRemoveKey);
@@ -146,6 +150,7 @@ namespace steam::api {
             shortcuts->get().erase(std::to_string(i + 1));
         }
 
+        // Dump the shortcut data back to the shortcuts file
         auto shortcutsFile = fs::File(getShortcutsFilePath(user) / "shortcuts.vdf", fs::File::Mode::Create);
         shortcutsFile.write(shortcuts->dump());
 

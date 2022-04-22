@@ -48,6 +48,9 @@ namespace steam::api {
         // Generate AppID
         auto appId = AppId(exePath, appName);
 
+        //Remove the shorcut if already present to avoid duplication
+        removeGameShortcut(user, appId);
+
         // Parse shortcuts
         auto shortcuts = getShortcuts(user);
         if (!shortcuts)

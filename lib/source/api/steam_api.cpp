@@ -43,7 +43,7 @@ namespace steam::api {
         return shortcuts;
     }
 
-    std::optional<AppId> addGameShortcut(const User &user, const std::string &appName, const std::fs::path &exePath, const std::string &launchOptions, const std::vector<std::string> &tags, bool hidden) {
+    std::optional<AppId> addGameShortcut(const User &user, const std::string &appName, const std::fs::path &exePath, const std::string &launchOptions, const std::vector<std::string> &tags, bool hidden, std::string icon) {
 
         // Generate AppID
         auto appId = AppId(exePath, appName);
@@ -98,7 +98,7 @@ namespace steam::api {
             shortcut["ShortcutPath"]        = "";
             shortcut["StartDir"]            = fmt::format("\"{0}\"", exePath.parent_path().string());
             shortcut["appid"]               = appId.getShortAppId();
-            shortcut["icon"]                = "";
+            shortcut["icon"]                = icon;
             shortcut["tags"]                = tagsSet;
 
             (*shortcuts)["shortcuts"][std::to_string(nextShortcutId)] = shortcut;

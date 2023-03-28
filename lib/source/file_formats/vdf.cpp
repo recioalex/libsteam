@@ -148,6 +148,8 @@ namespace steam {
 
             offset += bytesUsed;
             result.emplace(element.key, element.value);
+            if (offset == (data.size() -1)) //break here or the debug enabled c++1.03 of flatpack will shot an assert /usr/include/c++/11.3.0/span:278: Assertion '__idx < size()'
+                break;
         }
 
         return result;
